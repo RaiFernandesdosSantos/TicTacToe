@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-bt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="container">
+    <h1>Jogo da Velha</h1>
+    <h2>Escolha o primeiro jogador: </h2>
+
+    <div class="linha">
+        <select id="jogador" class="escolha">
+            <option value="1">X</option>
+            <option value="2">O</option>
+        </select>
+
+        <button>Resetar Tabuleiro</button>
+    </div>
+
+    <div class="tabuleiro">
+        <!-- Colocar divs para que fique mais facil 
+        desabilitar depois que a jogada for feita -->
+        <div>
+            <button class="casas"></button>
+        </div>
+        <button class="casas"></button>
+        <button class="casas"></button>
+        <button class="casas"></button>
+        <button class="casas"></button>
+        <button class="casas"></button>
+        <button class="casas"></button>
+        <button class="casas"></button>
+        <button class="casas"></button>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
