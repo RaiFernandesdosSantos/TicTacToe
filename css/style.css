@@ -37,4 +37,22 @@ html {
   text-align: center;
   font-size: 2rem;
   background-color: aliceblue;
+}
+.container .linha button {
+  width: 13rem;
+  height: 7rem;
+}
+.container .tabuleiro {
+  height: 50%;
+  width: 35%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+.container .tabuleiro > div {
+  border: 2px solid black;
+}
+.container .tabuleiro > div > button {
+  width: 100%;
+  height: 100%;
 }/*# sourceMappingURL=style.css.map */
