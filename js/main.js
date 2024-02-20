@@ -1,42 +1,63 @@
-let jogador = 1;
-let x = [];
-let o = [];
-let somaX = 0;
-let somaO = 0;
+const PLAYER_X = "X";
+const PLAYER_O = "O";
 
-const tabuleiro = document.querySelectorAll(".btnCasas");
-const reset = document.querySelector("#reset");
-const divs = document.querySelectorAll(".casa");
+let currentPlayer = PLAYER_X;
+let movesX = [];
+let movesO = [];
 
-reset.addEventListener("click", () => {
+const board = document.querySelectorAll(".btnCasas");
+const resetButton = document.querySelector("#reset");
+
+resetButton.addEventListener("click", () => {
   window.location.reload();
 });
 
-tabuleiro.forEach((casas, index) => {
-  casas.addEventListener("click", () => {
-    casas.disabled = true;
-    if (jogador === 1) {
-      casas.textContent = "X";
-      jogador = 2;
-      x.push(index);
-      somaX += index;
+board.forEach((cell, index) => {
+  cell.addEventListener("click", () => {
+    cell.disabled = true;
+    cell.textContent = currentPlayer;
+    recordMove(currentPlayer, index);
 
-      checarVencedor();
-    } else if (jogador === 2) {
-      casas.textContent = "O";
-      jogador = 1;
-      o.push(index);
-      somaO += index;
-
-      checarVencedor();
+    if (checkWinner(currentPlayer)) {
+      displayWinner(currentPlayer);
+    } else if (checkDraw()) {
+      alert("Empate!");
+    } else {
+      currentPlayer = currentPlayer === PLAYER_X ? PLAYER_O : PLAYER_X;
     }
   });
 });
 
-function checarVencedor() {
-  if (x.length > 2 && somaX % 3 === 0) {
-    console.log("X venceu");
-  } else if (o.length > 2 && somaO % 3 === 0) {
-    console.log("O venceu");
+function recordMove(player, index) {
+  if (player === PLAYER_X) {
+    movesX.push(index);
+  } else {
+    movesO.push(index);
   }
+}
+
+function checkWinner(player) {
+  const moves = player === PLAYER_X ? movesX : movesO;
+  const winningCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8], // linhas
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8], // colunas
+    [0, 4, 8],
+    [2, 4, 6], // diagonais
+  ];
+
+  return winningCombinations.some((combination) => {
+    return combination.every((cell) => moves.includes(cell));
+  });
+}
+
+function checkDraw() {
+  return movesX.length + movesO.length === 9;
+}
+
+function displayWinner(player) {
+  alert(`O jogador ${player} venceu!`);
 }
